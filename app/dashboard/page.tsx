@@ -1,9 +1,5 @@
 import ProductActions from "@/app/ui/dashboard/actions";
 import ProductsList from "@/app/ui/dashboard/list";
-import StatusSelect from "@/app/ui/dashboard/status";
-
-import { File, PlusCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -12,41 +8,37 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { Tabs, TabsContent } from "@/components/ui/tabs";
+
 
 export default function Dashboard() {
   return (
-      <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+      <Tabs defaultValue="all">
+        <ProductActions />
 
-        <Tabs defaultValue="all">
-          
-          <ProductActions />
+        <TabsContent value="all">
+          <Card x-chunk="dashboard-06-chunk-0">
+            <CardHeader>
+              <CardTitle>Products</CardTitle>
+              <CardDescription>
+                Manage your products and view their sales performance.
+              </CardDescription>
+            </CardHeader>
 
-          <TabsContent value="all">
+            <CardContent>
+              <ProductsList />
+            </CardContent>
 
-            <Card x-chunk="dashboard-06-chunk-0">
-              <CardHeader>
-                <CardTitle>Products</CardTitle>
-                <CardDescription>
-                  Manage your products and view their sales performance.
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent>
-                <ProductsList />
-              </CardContent>
-              
-              <CardFooter>
-                {/* Pagination */}
-                <div className="text-xs text-muted-foreground">
-                  Showing <strong>1-10</strong> of <strong>32</strong> products
-                </div>
-              </CardFooter>
-
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </main>
+            <CardFooter>
+              {/* Pagination */}
+              <div className="text-xs text-muted-foreground">
+                Showing <strong>1-10</strong> of <strong>32</strong> products
+              </div>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </main>
   );
 }
