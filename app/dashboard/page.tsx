@@ -1,5 +1,5 @@
-import ProductActions from "@/app/ui/dashboard/actions";
-import ProductsList from "@/app/ui/dashboard/list";
+import ProductActions from "@/app/ui/dashboard/products/actions";
+import ProductList from "@/app/ui/dashboard/products/list";
 import {
   Card,
   CardContent,
@@ -27,7 +27,7 @@ export default function Dashboard() {
             </CardHeader>
 
             <CardContent>
-              <ProductsList />
+              <ProductList />
             </CardContent>
 
             <CardFooter>

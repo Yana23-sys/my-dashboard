@@ -63,7 +63,7 @@ const products = [
     }
   ]
 
-export default function ProductsList() {
+export default function ProductList() {
     return (
         <Table>
         <TableHeader>
