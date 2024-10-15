@@ -1,4 +1,4 @@
-import ProductActions from "@/app/ui/dashboard/products/actions";
+import FilterBar from "@/app/ui/dashboard/products/actions";
 import ProductList from "@/app/ui/dashboard/products/list";
 import {
   Card,
@@ -15,8 +15,24 @@ export default function Page() {
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <Tabs defaultValue="all">
-        <ProductActions />
-
+        <FilterBar 
+        primaryFilterItems={[{
+          value: "all",
+          label: "All"
+        },
+        {
+          value: "active",
+          label: "Active"
+        },
+        {
+          value: "inactive",
+          label: "Inactive"
+        },
+        {
+          value: "draft",
+          label: "Draft"
+        }]}
+        />
         <TabsContent value="all">
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>

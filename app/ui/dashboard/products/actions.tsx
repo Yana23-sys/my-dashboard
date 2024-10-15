@@ -1,3 +1,7 @@
+"use client";
+
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -8,20 +12,48 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ListFilter, File, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-export default function ProductActions() {
+interface FilterValue {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  primaryFilterItems: FilterValue[];
+}
+
+export default function FilterBar({ primaryFilterItems }: Props) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const params = new URLSearchParams(searchParams);
+
+  const handlePrimaryFilterChange = (value: string) => {
+    params.set("primaryFilter", value);
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <div className="flex items-center">
-      <TabsList>
-        <TabsTrigger value="all">All</TabsTrigger>
-        <TabsTrigger value="active">Active</TabsTrigger>
-        <TabsTrigger value="draft">Draft</TabsTrigger>
-        <TabsTrigger value="archived" className="hidden sm:flex">
-          Archived
-        </TabsTrigger>
-      </TabsList>
+      <ToggleGroup
+        defaultValue={primaryFilterItems[0].value}
+        value={params.get("primaryFilter") || primaryFilterItems[0].value}
+        type="single"
+        onValueChange={handlePrimaryFilterChange}
+      >
+        {primaryFilterItems.map((item) => (
+          <ToggleGroupItem
+            key={item.value}
+            value={item.value}
+            aria-label={item.label}
+          >
+            {item.label}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
 
       <div className="ml-auto flex items-center gap-2">
         <DropdownMenu>
