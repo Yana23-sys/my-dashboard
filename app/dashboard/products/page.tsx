@@ -8,32 +8,30 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-
 
 export default function Page() {
   return (
-    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-      <Tabs defaultValue="all">
-        <FilterBar 
-        primaryFilterItems={[{
-          value: "all",
-          label: "All"
-        },
-        {
-          value: "active",
-          label: "Active"
-        },
-        {
-          value: "inactive",
-          label: "Inactive"
-        },
-        {
-          value: "draft",
-          label: "Draft"
-        }]}
+    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0">
+        <FilterBar
+          primaryFilterItems={[
+            {
+              value: "all",
+              label: "All",
+            },
+            {
+              value: "active",
+              label: "Active",
+            },
+            {
+              value: "inactive",
+              label: "Inactive",
+            },
+            {
+              value: "draft",
+              label: "Draft",
+            },
+          ]}
         />
-        <TabsContent value="all">
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
               <CardTitle>Products</CardTitle>
@@ -53,8 +51,6 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-        </TabsContent>
-      </Tabs>
     </main>
   );
 }
