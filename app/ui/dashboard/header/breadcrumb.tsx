@@ -5,9 +5,17 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+
+
+const capitalise = (str: string) => {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+const createLink = (paths: string[], index: number): string => {
+  return `/${paths.slice(0, index + 1).join("/")}`;
+}
+
 
 
 interface Props {
@@ -21,14 +29,9 @@ export default function BreadcrumbNav({ paths }: Props) {
         {paths.map((path, index) => (
           <React.Fragment key={index}>
             <BreadcrumbItem>
-              {index < paths.length - 1 && (
-                <BreadcrumbLink asChild>
-                  <Link href="#">{path}</Link>
-                </BreadcrumbLink>
-              )}
-              {index === paths.length - 1 && (
-                <BreadcrumbPage>{path}</BreadcrumbPage>
-              )}
+              <BreadcrumbLink asChild>
+                <Link href={createLink(paths, index)}>{capitalise(path)}</Link>
+              </BreadcrumbLink>
             </BreadcrumbItem>
             {index < paths.length - 1 && <BreadcrumbSeparator />}
           </React.Fragment>
