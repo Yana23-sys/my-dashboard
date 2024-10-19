@@ -1,7 +1,6 @@
 "use client";
 
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -12,7 +11,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ListFilter, File, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 interface FilterValue {
@@ -22,9 +20,10 @@ interface FilterValue {
 
 interface Props {
   primaryFilterItems: FilterValue[];
+  secondaryFilterItems: FilterValue[];
 }
 
-export default function FilterBar({ primaryFilterItems }: Props) {
+export default function FilterBar({ primaryFilterItems, secondaryFilterItems }: Props) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -39,6 +38,9 @@ export default function FilterBar({ primaryFilterItems }: Props) {
   return (
     <div className="flex items-center">
       <ToggleGroup
+        size="sm"
+        className="bg-secondary rounded-lg p-1"
+        variant="default"
         defaultValue={primaryFilterItems[0].value}
         value={params.get("primaryFilter") || primaryFilterItems[0].value}
         type="single"
@@ -49,6 +51,7 @@ export default function FilterBar({ primaryFilterItems }: Props) {
             key={item.value}
             value={item.value}
             aria-label={item.label}
+            className="data-[state=on]:bg-white"
           >
             {item.label}
           </ToggleGroupItem>
@@ -71,7 +74,7 @@ export default function FilterBar({ primaryFilterItems }: Props) {
             <DropdownMenuSeparator />
             <DropdownMenuCheckboxItem checked>Active</DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem> 
           </DropdownMenuContent>
         </DropdownMenu>
 

@@ -31,6 +31,7 @@ export default function Page() {
               label: "Draft",
             },
           ]}
+          secondaryFilterItems={[]}
         />
           <Card x-chunk="dashboard-06-chunk-0">
             <CardHeader>
